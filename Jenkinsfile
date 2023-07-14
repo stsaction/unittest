@@ -5,7 +5,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Checkout the repository from GitHub
-                git 'https://github.com/your/repo.git'
+                git 'https://github.com/stsaction/unittest.git'
             }
         }
         
