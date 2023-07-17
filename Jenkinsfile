@@ -8,21 +8,17 @@ pipeline {
                 sh 'dotnet restore'
             }
         }
-        stage('Unit Tests') {
+        stage('Unit Test') {
             steps {
-                // Run the unit tests
-                script {
-                    def testResults = sh returnStdout: true, script: 'dotnet test --no-restore --no-build --logger "trx;LogFileName=test-results.trx" --filter FullyQualifiedName~.*quickformapi.expresstaxexempt.com.Tests.* --verbosity normal'
-                    echo "Test Results:\n${testResults}"
-                }
-                post {
-                    always {
-                        // Archive the test results
-                        archiveArtifacts 'test-results.trx'
-                        // Archive the coverage results
-                        archiveArtifacts 'TestResults/Coverage/**'
-                    }
-                }
+                // Run unit tests before the build process
+                // Assuming your test projects are set up and configured properly
+                // Replace the following lines with your actual test commands
+
+                // For tests in Services folder (assuming you use "dotnet test" for .NET Core projects)
+                sh 'dotnet test Services/QForm990PFServiceTest.cs'
+                
+                // For tests in Controller folder (assuming you use "dotnet test" for .NET Core projects)
+                sh 'dotnet test Controller/FullControllerTest.cs'
             }
         }
     }
