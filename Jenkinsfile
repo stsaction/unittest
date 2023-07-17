@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Unit Test') {
             steps {
-                sh 'dotnet test quickformapi.expresstaxexempt.com.Tests.csproj'
+                sh 'dotnet test quickformapi.expresstaxexempt.com.Tests.csproj.user'
             }
         }
     }
