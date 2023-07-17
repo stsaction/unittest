@@ -12,7 +12,7 @@ pipeline {
             steps {
                 // Run the unit tests
                 script {
-                    def testResults = sh returnStdout: true, script: 'dotnet test --no-restore --no-build --logger "trx;LogFileName=test-results.trx" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./TestResults/Coverage/ /p:Filter=FullyQualifiedName~quickformapi.expresstaxexempt.com.Tests /p:DisableParallel=true quickformapi.expresstaxexempt.com.Tests.csproj'
+                    def testResults = sh returnStdout: true, script: 'dotnet test --no-restore --no-build --logger "trx;LogFileName=test-results.trx" /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./TestResults/Coverage/ /p:Filter=FullyQualifiedName~.*quickformapi.expresstaxexempt.com.Tests.* /p:DisableParallel=true'
                     echo "Test Results:\n${testResults}"
                 }
                 post {
