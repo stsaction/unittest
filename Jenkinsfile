@@ -10,13 +10,13 @@ pipeline {
             }
         }
         
-        stage('Build and Test') {
-            steps {
-                // Use the .NET Core CLI to build and run the tests using xUnit.
-                sh 'dotnet test --logger "trx;LogFileName=testresults.trx"'
+            stage('Run xUnit Tests') {
+                steps {
+                    // Use the .NET Core CLI to run the xUnit tests.
+                    sh 'dotnet test --logger "trx;LogFileName=testresults.trx"'
+                }
             }
         }
-    }
     
     post {
         always {
