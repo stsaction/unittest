@@ -2,26 +2,27 @@ pipeline {
     agent any
     
     stages {
+        
         stage('Restore Dependencies') {
             steps {
-                // Restore dependencies for the tests
+                // Use the .NET Core CLI to restore the project dependencies.
                 sh 'dotnet restore'
             }
         }
         
-        stage('Unit Tests') {
+        stage('Build and Test') {
             steps {
-                // Run the unit tests
-                sh 'dotnet test --no-restore --no-build --logger "trx;LogFileName=test-results.trx"'
-            }
-            post {
-                always {
-                    // Archive the test results
-                    archiveArtifacts 'test-results.trx'
-                }
+                // Use the .NET Core CLI to build and run the tests using xUnit.
+                sh 'dotnet test --logger "trx;LogFileName=testresults.trx"'
             }
         }
-        
-        // Add more stages as needed
+    }
+    
+    post {
+        always {
+            // Archive test results for Jenkins to display in the build summary.
+            junit 'testresults.trx'
+        }
     }
 }
+        
